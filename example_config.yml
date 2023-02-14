@@ -1,0 +1,55 @@
+output_path: ./outputs
+gpu: 0
+seed: 99
+
+# CLIP-related
+text_prompt: a giraffe
+base_text_prompt: a cow
+clip_model: ViT-B/32
+consistency_clip_model: ViT-B/32
+consistency_vit_stride: 8
+consistency_vit_layer: 11
+
+# Mesh
+mesh: ./meshes/spot.obj
+retriangulate: 0
+
+# Render settings
+bsdf: diffuse
+
+# Hyper-parameters
+lr: 0.0025
+epochs: 2500
+clip_weight: 1.0
+delta_clip_weight: 1.0
+regularize_jacobians_weight: 0.5
+consistency_loss_weight: 0.5
+consistency_elev_filter: 30
+consistency_azim_filter: 20
+batch_size: 25
+train_res: 512
+resize_method: cubic
+
+# Camera parameters
+fov_min: 30.0
+fov_max: 90.0
+dist_min: 2.5
+dist_max: 3.5
+light_power: 5.0
+elev_alpha: 1.0
+elev_beta: 5.0 
+elev_max: 60.0
+azim_min: 0.0
+azim_max: 360.0
+aug_loc: 1
+aug_light: 1
+aug_bkg: 1
+adapt_dist: 1
+
+log_interval: 5
+log_interval_im: 150
+log_elev: 30.0
+log_fov: 60.0
+log_dist: 3.0
+log_res: 512
+log_light_power: 3.0
