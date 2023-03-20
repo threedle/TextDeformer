@@ -6,6 +6,7 @@ import pymeshlab
 import shutil
 import torch
 import torchvision
+import logging
 import yaml
 
 import numpy as np
@@ -34,11 +35,11 @@ from utilities.clip_spatial import CLIPVisualEncoder
 from utilities.resize_right import resize, cubic, linear, lanczos2, lanczos3
 
 def loop(cfg):
-    cfg = EasyDict(cfg)
-    output_path = pathlib.Path(cfg.output_path)
+    output_path = pathlib.Path(cfg['output_path'])
     os.makedirs(output_path, exist_ok=True)
     with open(output_path / 'config.yml', 'w') as f:
         yaml.dump(cfg, f, default_flow_style=False)
+    cfg = EasyDict(cfg)
     
     print(f'Output directory {cfg.output_path} created')
 
@@ -88,6 +89,9 @@ def loop(cfg):
     load_mesh = obj.load_obj(str(output_path / 'tmp' / 'mesh.obj'))
     load_mesh = mesh.unit_size(load_mesh)
 
+    ms.add_mesh(pymeshlab.Mesh(vertex_matrix=load_mesh.v_pos.cpu().numpy(), face_matrix=load_mesh.t_pos_idx.cpu().numpy()))
+    ms.save_current_mesh(str(output_path / 'tmp' / 'mesh.obj'), save_vertex_color=False)
+
     # TODO: Need these for rendering even if we don't optimize textures
     texture_map = texture.create_trainable(np.random.uniform(size=[512]*2 + [3], low=0.0, high=1.0), [512]*2, True)
     normal_map = texture.create_trainable(np.array([0, 0, 1]), [512]*2, True)
@@ -104,6 +108,8 @@ def loop(cfg):
     )
 
     jacobian_source = SourceMesh.SourceMesh(0, str(output_path / 'tmp' / 'mesh.obj'), {}, 1, ttype=torch.float)
+    if len(list((output_path / 'tmp').glob('*.npz'))) > 0:
+        logging.warn(f'Using existing Jacobian .npz files in {str(output_path)}/tmp/ ! Please check if this is intentional.')
     jacobian_source.load()
     jacobian_source.to(device)
 
