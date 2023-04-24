@@ -1,5 +1,5 @@
-# TextDeformer
-![alt](images/hand_to_octopus.gif)![alt](images/planck_to_einstein.gif)![alt](images/spot_to_giraffe.gif)
+# TextDeformer [[Project Page](https://threedle.github.io/TextDeformer/)]
+![alt](images/planck_to_einstein.gif)
 ## Installation
 
     conda create -y -n TextDeformer python=3.9
