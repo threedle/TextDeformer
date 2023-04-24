@@ -76,8 +76,6 @@ def loop(cfg):
 
     if cfg.retriangulate:
         print('Retriangulating shape')
-        ms = pymeshlab.MeshSet()
-        ms.load_new_mesh(str(output_path / 'tmp' / 'mesh.obj'))
         ms.meshing_isotropic_explicit_remeshing()
     
     if not ms.current_mesh().has_wedge_tex_coord():
