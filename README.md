@@ -1,4 +1,5 @@
 # TextDeformer [[Project Page](https://threedle.github.io/TextDeformer/)]
+[![arXiv](https://img.shields.io/badge/arXiv-TextDeformer-b31b1b.svg)](https://arxiv.org/abs/2304.13348)
 ![alt](images/planck_to_einstein.gif)
 ## Installation
 
@@ -40,3 +41,12 @@ Due to how the camera angles are sampled, the input mesh may need to be re-orien
 
 #### Jacobian temp files
 The ``NeuralJacobianFields`` code in this repository will create several temporary files in ``outputs/tmp``. Note that if these temporary files already exist, this code will attempt to read the existing files instead of overwriting them. This may cause issues if you run multiple examples with the same output path, intending to overwrite the output folder.
+
+## Citation
+```
+@InProceedings{Gao_2023_SIGGRAPH,
+    author    = {Gao, William and Aigerman, Noam and Groueix Thibault and Kim, Vladimir and Hanocka, Rana},
+    title     = {TextDeformer: Geometry Manipulation using Text Guidance},
+    booktitle = {ACM Transactions on Graphics (SIGGRAPH)},
+    year      = {2023},
+}
