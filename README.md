@@ -1,5 +1,6 @@
 # TextDeformer [[Project Page](https://threedle.github.io/TextDeformer/)]
 [![arXiv](https://img.shields.io/badge/arXiv-TextDeformer-b31b1b.svg)](https://arxiv.org/abs/2304.13348)
+
 ![alt](images/planck_to_einstein.gif)
 ## Installation
 
