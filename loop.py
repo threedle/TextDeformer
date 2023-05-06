@@ -278,20 +278,20 @@ def loop(cfg):
             params_camera = next(iter(cams))
             for key in params_camera:
                 params_camera[key] = params_camera[key].to(device)
-        base_render = render.render_mesh(
-            glctx,
-            base_mesh.eval(params_camera),
-            params_camera['mvp'],
-            params_camera['campos'],
-            params_camera['lightpos'],
-            cfg.light_power,
-            cfg.train_res,
-            spp=1,
-            num_layers=1,
-            msaa=False,
-            background=params_camera['bkgs'],
-        ).permute(0, 3, 1, 2)
-        base_render = resize(base_render, out_shape=(224, 224), interp_method=resize_method)
+            base_render = render.render_mesh(
+                glctx,
+                base_mesh.eval(params_camera),
+                params_camera['mvp'],
+                params_camera['campos'],
+                params_camera['lightpos'],
+                cfg.light_power,
+                cfg.train_res,
+                spp=1,
+                num_layers=1,
+                msaa=False,
+                background=params_camera['bkgs'],
+            ).permute(0, 3, 1, 2)
+            base_render = resize(base_render, out_shape=(224, 224), interp_method=resize_method)
         
         if it % cfg.log_interval_im == 0:
             log_idx = torch.randperm(cfg.batch_size)[:5]
